@@ -50,7 +50,7 @@
   </keywords>
 
   <releases>
-    <release version="0.1.0" date="2026-04-27">
+    <release version="1.0.0" date="2026-04-27">
       <description>
         <p>Initial release with GTK4 native UI.</p>
       </description>
