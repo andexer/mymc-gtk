@@ -1,0 +1,15 @@
+#!/bin/bash
+# AppRun - Entry point for mymc-gtk AppImage
+# Uses system Python3; PYTHONPATH points to bundled Python core inside the AppImage
+
+HERE="$(dirname "$(readlink -f "${0}")")"
+
+# Bundled Python core (ps2mc.py, ps2save.py, etc.)
+export PYTHONPATH="${HERE}/usr/share/mymc-gtk/python_core:${PYTHONPATH}"
+
+# GTK / GLib theme data
+export XDG_DATA_DIRS="${HERE}/usr/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+export GDK_PIXBUF_MODULEDIR="${HERE}/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders"
+export GDK_PIXBUF_MODULE_FILE="${HERE}/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+
+exec "${HERE}/usr/bin/mymc-gtk" "$@"

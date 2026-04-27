@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.mymc.gtk</id>
+
+  <name>mymc GTK</name>
+  <summary>PS2 Memory Card Manager</summary>
+
+  <metadata_license>MIT</metadata_license>
+  <project_license>GPL-2.0</project_license>
+
+  <developer id="com.mymc">
+    <name>mymc contributors</name>
+  </developer>
+
+  <!-- Launchable must match the desktop file basename -->
+  <launchable type="desktop-id">mymc-gtk.desktop</launchable>
+
+  <description>
+    <p>
+      Mymc GTK is a native Linux GUI for managing PlayStation 2 memory card
+      images (.mc2 / .ps2). It lets you list, import, export and delete save
+      files stored on a memory card image without any emulator.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Open and browse PS2 memory card images</li>
+      <li>Import save files (.psu, .max, .cbs, .sps)</li>
+      <li>Export save files to common formats</li>
+      <li>Delete individual saves from a card image</li>
+      <li>Native GTK4 UI — runs on both X11 and Wayland</li>
+    </ul>
+  </description>
+
+  <!-- No real upstream URL yet; omit to avoid url-not-reachable warning -->
+
+  <provides>
+    <binary>mymc-gtk</binary>
+  </provides>
+
+  <categories>
+    <category>Game</category>
+    <category>Utility</category>
+  </categories>
+
+  <keywords>
+    <keyword>PS2</keyword>
+    <keyword>PlayStation 2</keyword>
+    <keyword>memory card</keyword>
+    <keyword>save game</keyword>
+  </keywords>
+
+  <releases>
+    <release version="0.1.0" date="2026-04-27">
+      <description>
+        <p>Initial release with GTK4 native UI.</p>
+      </description>
+    </release>
+  </releases>
+
+  <content_rating type="oars-1.1"/>
+</component>

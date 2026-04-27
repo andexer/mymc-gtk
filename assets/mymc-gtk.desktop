@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=mymc GTK
+Comment=PS2 Memory Card Manager
+GenericName=Memory Card Manager
+Exec=mymc-gtk %f
+Icon=mymc-gtk
+Terminal=false
+Type=Application
+Categories=Game;
+Keywords=PS2;PlayStation;memory card;save;
+MimeType=application/octet-stream;
+StartupNotify=true
+StartupWMClass=mymc-gtk

@@ -1,0 +1,71 @@
+[package]
+name = "mymc-gtk"
+version = "0.1.0"
+edition = "2024"
+description = "PS2 Memory Card Manager — native GTK4 frontend for mymc (fork)"
+license = "GPL-2.0"
+authors = ["mymc contributors"]
+repository = "https://github.com/andexer/mymc-gtk"
+readme = "README.md"
+
+[dependencies]
+anyhow = "1"
+async-channel = "2"
+gio = "0.21"
+glib = "0.21"
+gtk = { package = "gtk4", version = "0.10", features = ["v4_10"] }
+pyo3 = { version = "0.28", features = ["auto-initialize"] }
+thiserror = "2"
+
+# ── Optimized release profile ──────────────────────────────────────────────
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
+
+# ── cargo-deb (.deb) ───────────────────────────────────────────────────────
+[package.metadata.deb]
+maintainer = "mymc contributors"
+copyright = "2024, mymc contributors"
+license-file = ["LICENSE", "0"]
+extended-description = """\
+Mymc GTK is a native Linux GUI for managing PS2 memory card images (.mc2 / .ps2).\
+It allows importing, exporting and inspecting save files."""
+depends = "libgtk-4-1, python3 (>= 3.8)"
+section = "games"
+priority = "optional"
+assets = [
+    ["target/release/mymc-gtk", "usr/bin/", "755"],
+    ["assets/mymc-gtk.desktop", "usr/share/applications/", "644"],
+    ["assets/mymc-gtk.png", "usr/share/pixmaps/", "644"],
+    ["assets/mymc-gtk.png", "usr/share/icons/hicolor/256x256/apps/", "644"],
+    ["assets/mymc-gtk.appdata.xml", "usr/share/metainfo/", "644"],
+    ["../ps2mc.py", "usr/share/mymc-gtk/python_core/", "644"],
+    ["../ps2save.py", "usr/share/mymc-gtk/python_core/", "644"],
+    ["../ps2mc_dir.py", "usr/share/mymc-gtk/python_core/", "644"],
+    ["../ps2mc_ecc.py", "usr/share/mymc-gtk/python_core/", "644"],
+    ["../lzari.py", "usr/share/mymc-gtk/python_core/", "644"],
+    ["../sjistab.py", "usr/share/mymc-gtk/python_core/", "644"],
+]
+
+# ── cargo-generate-rpm (.rpm) ──────────────────────────────────────────────
+[package.metadata.generate-rpm]
+assets = [
+    { source = "target/release/mymc-gtk", dest = "/usr/bin/mymc-gtk", mode = "755" },
+    { source = "assets/mymc-gtk.desktop", dest = "/usr/share/applications/mymc-gtk.desktop", mode = "644" },
+    { source = "assets/mymc-gtk.png",     dest = "/usr/share/pixmaps/mymc-gtk.png",            mode = "644" },
+    { source = "assets/mymc-gtk.png",     dest = "/usr/share/icons/hicolor/256x256/apps/mymc-gtk.png", mode = "644" },
+    { source = "assets/mymc-gtk.appdata.xml", dest = "/usr/share/metainfo/mymc-gtk.appdata.xml", mode = "644" },
+    { source = "../ps2mc.py",      dest = "/usr/share/mymc-gtk/python_core/ps2mc.py",      mode = "644" },
+    { source = "../ps2save.py",    dest = "/usr/share/mymc-gtk/python_core/ps2save.py",    mode = "644" },
+    { source = "../ps2mc_dir.py",  dest = "/usr/share/mymc-gtk/python_core/ps2mc_dir.py",  mode = "644" },
+    { source = "../ps2mc_ecc.py",  dest = "/usr/share/mymc-gtk/python_core/ps2mc_ecc.py",  mode = "644" },
+    { source = "../lzari.py",      dest = "/usr/share/mymc-gtk/python_core/lzari.py",      mode = "644" },
+    { source = "../sjistab.py",    dest = "/usr/share/mymc-gtk/python_core/sjistab.py",    mode = "644" },
+]
+
+[package.metadata.generate-rpm.requires]
+python3 = ">= 3.8"
+gtk4 = "*"
